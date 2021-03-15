@@ -7,8 +7,26 @@
 #include <sys/times.h>
 
 
+#include <dlfcn.h>
+  
+
+int (*free_file_list_dl)(filePair* filePairList);
+filePair* (*create_file_pair_dl)(char*,char*);
+int (*add_file_pair_dl)(filePair*, filePair* );
+block** (*create_table_dl)(int);
+int (*free_table_dl)(block** ,int );
+int (*merge_file_sequence_dl)(filePair*);
+block* (*create_block_dl)(filePair*);
+int (*add_all_blocks_dl)(filePair* ,block** ,int );
+int (*print_files_dl)(block** , int );
+int (*delete_block_dl)(block** ,int );
+int (*delete_row_dl)(block*  ,int );
+
 
 void timeit(int pairsNumber,int rowsNumber){
+
+    
+
 
     char test_filename1[] = "test_file1.txt";
     char test_filename2[] = "test_file2.txt";
@@ -28,12 +46,12 @@ void timeit(int pairsNumber,int rowsNumber){
     fclose(test_file1);
     fclose(test_file2);
     
-    filePair* filePairList = create_file_pair(test_filename1,test_filename2);
+    filePair* filePairList = create_file_pair_dl(test_filename1,test_filename2);
     for(int i =0;i<pairsNumber-1;i++){
-        add_file_pair(filePairList,create_file_pair(test_filename1,test_filename2));
+        add_file_pair_dl(filePairList,create_file_pair_dl(test_filename1,test_filename2));
     }
 
-    block** table = create_table(pairsNumber);
+    block** table = create_table_dl(pairsNumber);
 
     struct tms start_time;
     struct tms end_time;
@@ -43,7 +61,7 @@ void timeit(int pairsNumber,int rowsNumber){
     clock_t start = clock();
     //merge
     
-    merge_file_sequence(filePairList);
+    merge_file_sequence_dl(filePairList);
 
     times(&end_time);
     clock_t end = clock();
@@ -63,7 +81,7 @@ void timeit(int pairsNumber,int rowsNumber){
     start = clock();
 
 
-    add_all_blocks(filePairList,table,pairsNumber);
+    add_all_blocks_dl(filePairList,table,pairsNumber);
     
     end = clock();  
     times(&end_time);
@@ -83,7 +101,7 @@ void timeit(int pairsNumber,int rowsNumber){
     times(&start_time);
     start = clock();
 
-    free_table(table,pairsNumber);
+    free_table_dl(table,pairsNumber);
 
     times(&end_time);
     end = clock();
@@ -106,22 +124,22 @@ void timeit(int pairsNumber,int rowsNumber){
     start = clock();
     times(&start_time);
 
-    table = create_table(pairsNumber);
+    table = create_table_dl(pairsNumber);
     
-    merge_file_sequence(filePairList);
-    
-    
-    add_all_blocks(filePairList,table,pairsNumber);
+    merge_file_sequence_dl(filePairList);
     
     
-    free_table(table,pairsNumber);
+    add_all_blocks_dl(filePairList,table,pairsNumber);
     
-    table = create_table(pairsNumber);
-    merge_file_sequence(filePairList);
     
-    add_all_blocks(filePairList,table,pairsNumber);
+    free_table_dl(table,pairsNumber);
     
-    free_table(table,pairsNumber);
+    table = create_table_dl(pairsNumber);
+    merge_file_sequence_dl(filePairList);
+    
+    add_all_blocks_dl(filePairList,table,pairsNumber);
+    
+    free_table_dl(table,pairsNumber);
     
      
     times(&end_time);
@@ -141,6 +159,33 @@ void timeit(int pairsNumber,int rowsNumber){
 
 
 int main(int argc,char**argv){
+
+
+
+
+
+    
+    
+    void* handle  = dlopen("./libmerge.so",RTLD_NOW);
+    if(!handle){
+    puts("No library found");
+    return 1;
+    }
+
+    free_file_list_dl = dlsym(handle,"free_file_list");
+    delete_block_dl = dlsym(handle,"delete_block");
+    create_file_pair_dl = dlsym(handle,"create_file_pair");
+    add_file_pair_dl = dlsym(handle,"add_file_pair");
+    create_table_dl = dlsym(handle,"create_table");
+    free_table_dl = dlsym(handle,"free_table");
+    merge_file_sequence_dl = dlsym(handle,"merge_file_sequence");
+    create_block_dl = dlsym(handle,"create_block");
+    add_all_blocks_dl = dlsym(handle,"add_all_blocks");
+    print_files_dl = dlsym(handle,"print_files");
+    delete_block_dl = dlsym(handle,"delete_block");
+    delete_row_dl = dlsym(handle,"delete_row");
+
+     
     if(strcmp(argv[1],"timeit")==0){
         puts("2 BLOCKS");
         puts("------------------------------------");
@@ -189,32 +234,36 @@ int main(int argc,char**argv){
         timeit(100,1000);
         puts("");
         puts("");
+        dlclose(handle);
         return 0;
     }
 
     block** table=NULL;
-    filePair* filePairList;
-    int size;
+    filePair* filePairList = NULL;
+    int size = 0;
+
 
     for(int i =1; i < argc;i++){
         if(strcmp(argv[i],"create_table") == 0){
              
              size = atoi(argv[++i]);
-             table = create_table(size);
+             table = create_table_dl(size);
+             
+
               
         }
         else if(strcmp(argv[i],"merge_files")== 0){
             char* filenameA = strtok(argv[++i],":");
             char* filenameB = strtok(NULL,":");
-            filePairList = create_file_pair(filenameA,filenameB);
+            filePairList = create_file_pair_dl(filenameA,filenameB);
             for(int j = 0;j<size-1;j++){
                 filenameA = strtok(argv[i+1+j],":");
                 filenameB = strtok(NULL,":");
-                add_file_pair(filePairList,create_file_pair(filenameA,filenameB));
+                add_file_pair_dl(filePairList,create_file_pair_dl(filenameA,filenameB));
                 
             }
-            merge_file_sequence(filePairList);
-            add_all_blocks(filePairList,table,size);
+            merge_file_sequence_dl(filePairList);
+            add_all_blocks_dl(filePairList,table,size);
         }
         else if(strcmp(argv[i],"remove_block")==0){
             int block_idx = atoi(argv[++i]);
@@ -222,7 +271,7 @@ int main(int argc,char**argv){
                 puts("Block index is too high");
                 continue;
             }
-            delete_block(table,block_idx);
+            delete_block_dl(table,block_idx);
         }
         else if(strcmp(argv[i],"remove_row")==0){
             int row_idx = atoi(argv[++i]);
@@ -232,14 +281,19 @@ int main(int argc,char**argv){
                 i++;
                 continue;
             }
-            delete_row(block,atoi(argv[++i]));
+            delete_row_dl(block,atoi(argv[++i]));
         }    
     }
-    print_files(table,size);
+    print_files_dl(table,size);
 
     
 
-    free_file_list(filePairList);
-    free_table(table,size);
+    free_file_list_dl(filePairList);
+    free_table_dl(table,size);
+    
+    #ifdef dynamic
+    dlclose(handle);
+    #endif
+    
 
 }

@@ -193,8 +193,8 @@ int main(int argc,char**argv){
     }
 
     block** table=NULL;
-    filePair* filePairList;
-    int size;
+    filePair* filePairList = NULL;
+    int size = 0;
 
     for(int i =1; i < argc;i++){
         if(strcmp(argv[i],"create_table") == 0){
