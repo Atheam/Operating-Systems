@@ -1,3 +1,2 @@
-a nic
-spoko
-
+Lorem ipsum dolor sit ame 
+Consectetur adipiscing elit 

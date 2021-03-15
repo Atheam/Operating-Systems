@@ -17,6 +17,7 @@ filePair* create_file_pair(char * filenameA,char* filenameB){
 }
 
 int add_file_pair(filePair* filePairList, filePair* filePair){
+    
     if(filePairList == NULL) return 0;
     struct filePair* current = filePairList;
     while(current->next != NULL){
@@ -26,13 +27,18 @@ int add_file_pair(filePair* filePairList, filePair* filePair){
     return 1;
 }
 
+
 int free_file_list(filePair* filePairList){
+    
+    
     if(filePairList == NULL) return 0;
-    struct filePair* tmp;
+    filePair* tmp;
     while(filePairList!=NULL){
+        
         tmp = filePairList;
         filePairList=filePairList->next;
         free(tmp);
+        
     }
     return 1;
 } 
@@ -67,7 +73,6 @@ int merge_file_sequence(filePair* fileSequence){
     }
 
     FILE *temporary = tmpfile();
-    
     char *line = NULL;
     size_t len = 0;
     while(1){
@@ -133,6 +138,7 @@ int row_count(block** table,int index){
 
 int delete_row(block* block,int line_index){
     if(block == NULL) return 0;
+    if(block->lines[line_index] == NULL) return 0;
     free(block->lines[line_index]);
     block->lines[line_index] = NULL;
     return 1;
@@ -142,12 +148,12 @@ int print_files(block** table, int size){
     if(table == NULL) return 0;
     for(int i =0; i < size;i++){
         if(table[i] == NULL){
-            printf("BLOK NR %d ZOSTAL USUNIETY\n",i);
+            printf("BLOCK %d WAS REMOVED\n",i);
             continue;
         }
         for(int j = 0;j<table[i]->size;j++){
             if(table[i]->lines[j] == NULL){
-                printf("WIERSZ NR %d ZOSTAL USUNIETY\n",j);
+                printf("ROW %d WAS REMOVED\n",j);
                 continue;
             }
             printf("%s",table[i]->lines[j]);
@@ -159,6 +165,7 @@ int print_files(block** table, int size){
 
 int delete_block(block** table,int index){
     if(table == NULL) return 0;
+    if(table[index] == NULL) return 0;
     for(int i = 0;i < table[index]->size;i++){
         delete_row(table[index],i);
     }
