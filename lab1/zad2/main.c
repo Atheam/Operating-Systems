@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "mergelib.h"
 #include <string.h>
+#include <stdlib.h>
 
 
 
@@ -14,7 +15,7 @@ int main(int argc,char**argv){
              size = atoi(argv[++i]);
              table = create_table(size);
         }
-        else if(argv[i],"merge_files"){
+        else if(strcmp(argv[i],"merge_files")){
             for(int j = 0;j<size;j++){
                 char* filenameA = strtok(argv[i+1+j],":");
                 char* filenameB = strtok(NULL,":");
@@ -26,7 +27,10 @@ int main(int argc,char**argv){
         }
         else if(strcmp(argv[i],"remove_block")){
             delete_block(table,atoi(argv[++i]));
-                
+        }
+        else if(strcmp(argv[i],"remove_row")){
+            delete_row(table[atoi(argv[i+1])],atoi(argv[i+2]));
+            i+=2;
         }
         
     }

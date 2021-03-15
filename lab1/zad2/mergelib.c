@@ -142,12 +142,12 @@ int print_files(block** table, int size){
     if(table == NULL) return 0;
     for(int i =0; i < size;i++){
         if(table[i] == NULL){
-            printf("BLOK NR %d ZOSTAL USUNIETY\n",i);
+            printf("BLOCK NR %d WAS REMOVED\n",i);
             continue;
         }
         for(int j = 0;j<table[i]->size;j++){
             if(table[i]->lines[j] == NULL){
-                printf("WIERSZ NR %d ZOSTAL USUNIETY\n",j);
+                printf("ROW NR %d WAS REMOVED\n",j);
                 continue;
             }
             printf("%s",table[i]->lines[j]);
