@@ -37,7 +37,7 @@ int main(int argc, char* argv[]){
         perror("Blad przy otwieraniu pliku");
         return -1;
     }
-    int fileB = open(argv[2],O_WRONLY);
+    int fileB = open(argv[2],O_WRONLY|O_CREAT);
     if(fileB == -1){
         close(fileA);
         perror("Blad przy otwieraniu pliku");

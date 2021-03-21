@@ -54,7 +54,7 @@ int main(int argc, char * argv[]){
         perror("Nie udalo sie otworzyc pliku");
         return -1;
     }
-    int fileB = open(argv[2],O_WRONLY);
+    int fileB = open(argv[2],O_WRONLY|O_CREAT);
 
     if(fileB == -1){
         close(fileA);

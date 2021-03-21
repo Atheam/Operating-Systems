@@ -25,7 +25,7 @@ int main(int argc, char* argv[]){
 
     char c;
 
-    if(argc <= 3){
+    if(argc < 3){
         perror("Niepoprawna liczba argumentow");
         return 1;
     }

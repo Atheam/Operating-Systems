@@ -55,6 +55,7 @@ int main(int argc, char* argv[]){
         times(&start_time);
         start = clock();
     }
+    
     fileA = fopen(filenameA,"r");
     
     if(!fileA){
