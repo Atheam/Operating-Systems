@@ -7,7 +7,9 @@ clean:
 	
 
 run:
+	make clean
 	$(CC) zad1.c -o zad1
 	./zad1 5
+	make clean
 
 
