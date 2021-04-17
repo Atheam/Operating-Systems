@@ -1,0 +1,31 @@
+FORK TEST
+Ignore test
+Signal handling in child process: 
+Signal ignored in a child
+Signal handling in parent process: 
+Signal ignored in a parent
+Handler test
+Signal handling in child process: 
+Received a signal with number: 10
+Signal handling in parent process: 
+Received a signal with number: 10
+Mask test
+Signal handling in child process: 
+Signal blocked in child
+Signal handling in parent process: 
+Signal blocked in parent
+Pending test
+Signal handling in child process: 
+Signal not pending in child process
+Signal handling in parent process: 
+Signal pending in parent process
+EXEC TEST
+Ignore test
+Signal handling in exec:
+Signal ignored in exec
+Mask test
+Signal handling in exec:
+Signal blocked in exec
+Pending test
+Singal handling in exec:
+Signal pending in exec
