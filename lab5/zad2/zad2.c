@@ -30,7 +30,7 @@ int main(int argc, char* argv[]){
         char *topic = argv[2];
         char *content = argv[3];
         char to_run[1024];
-        
+
         sprintf(to_run,"echo %s | mail -s %s %s",content,topic,receiver);
         FILE* mail_out = popen(to_run,"r");
         pclose(mail_out);
