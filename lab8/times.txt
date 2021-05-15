@@ -1,0 +1,108 @@
+-----BLOCK------
+1 thread
+Thread 1 took: 1279.000000 microseconds
+Total time: 1550.000000 microseconds 
+
+
+2 threads
+Thread 1 took: 539.000000 microseconds
+Thread 2 took: 499.000000 microseconds
+Total time: 778.000000 microseconds 
+
+
+4 threads
+Thread 1 took: 507.000000 microseconds
+Thread 2 took: 508.000000 microseconds
+Thread 3 took: 500.000000 microseconds
+Thread 4 took: 498.000000 microseconds
+Total time: 880.000000 microseconds 
+
+
+8 threads
+Thread 1 took: 281.000000 microseconds
+Thread 2 took: 267.000000 microseconds
+Thread 3 took: 263.000000 microseconds
+Thread 4 took: 329.000000 microseconds
+Thread 5 took: 261.000000 microseconds
+Thread 6 took: 245.000000 microseconds
+Thread 7 took: 345.000000 microseconds
+Thread 8 took: 267.000000 microseconds
+Total time: 915.000000 microseconds 
+
+
+16 threads
+Thread 1 took: 130.000000 microseconds
+Thread 2 took: 148.000000 microseconds
+Thread 3 took: 147.000000 microseconds
+Thread 4 took: 140.000000 microseconds
+Thread 5 took: 181.000000 microseconds
+Thread 6 took: 217.000000 microseconds
+Thread 7 took: 397.000000 microseconds
+Thread 8 took: 140.000000 microseconds
+Thread 9 took: 198.000000 microseconds
+Thread 10 took: 128.000000 microseconds
+Thread 11 took: 331.000000 microseconds
+Thread 12 took: 137.000000 microseconds
+Thread 13 took: 148.000000 microseconds
+Thread 14 took: 102.000000 microseconds
+Thread 15 took: 158.000000 microseconds
+Thread 16 took: 128.000000 microseconds
+Total time: 1026.000000 microseconds 
+
+
+-----NUMBERS------
+1 thread
+Thread 1 took: 3332.000000 microseconds
+Total time: 3593.000000 microseconds 
+
+
+2 threads
+Thread 1 took: 2925.000000 microseconds
+Thread 2 took: 2440.000000 microseconds
+Total time: 3079.000000 microseconds 
+
+
+4 threads
+Thread 1 took: 4015.000000 microseconds
+Thread 2 took: 4362.000000 microseconds
+Thread 3 took: 3748.000000 microseconds
+Thread 4 took: 2672.000000 microseconds
+Total time: 4479.000000 microseconds 
+
+
+8 threads
+Thread 1 took: 4129.000000 microseconds
+Thread 2 took: 4068.000000 microseconds
+Thread 3 took: 4068.000000 microseconds
+Thread 4 took: 3746.000000 microseconds
+Thread 5 took: 3726.000000 microseconds
+Thread 6 took: 3231.000000 microseconds
+Thread 7 took: 2719.000000 microseconds
+Thread 8 took: 2415.000000 microseconds
+Total time: 7958.000000 microseconds 
+
+
+16 threads
+Thread 1 took: 4075.000000 microseconds
+Thread 2 took: 4075.000000 microseconds
+Thread 3 took: 4073.000000 microseconds
+Thread 4 took: 4479.000000 microseconds
+Thread 5 took: 5356.000000 microseconds
+Thread 6 took: 9300.000000 microseconds
+Thread 7 took: 5144.000000 microseconds
+Thread 8 took: 6521.000000 microseconds
+Thread 9 took: 5187.000000 microseconds
+Thread 10 took: 3856.000000 microseconds
+Thread 11 took: 3226.000000 microseconds
+Thread 12 took: 6235.000000 microseconds
+Thread 13 took: 5955.000000 microseconds
+Thread 14 took: 6209.000000 microseconds
+Thread 15 took: 2408.000000 microseconds
+Thread 16 took: 2463.000000 microseconds
+Total time: 15523.000000 microseconds 
+
+
+
+
+
+
